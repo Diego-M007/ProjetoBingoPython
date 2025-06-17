@@ -1,9 +1,22 @@
 import customtkinter
 from tkinter import messagebox
+import os
+import sys
+
+def resource_path(relative_path):
+    """ Retorna o caminho absoluto para o recurso, funcionando para dev e para PyInstaller """
+    try:
+        # PyInstaller cria uma pasta temporária e armazena o caminho em _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 # A classe BingoGame continua a mesma
 class BingoGame:
     def __init__(self):
+        
         self.numeros = []
 
 # As funções de handler continuam as mesmas
@@ -60,7 +73,7 @@ def Reiniciar_Bingo():
 customtkinter.set_appearance_mode("light")
 PaginaPrincipal = customtkinter.CTk()
 
-PaginaPrincipal.iconbitmap("icone.ico")
+PaginaPrincipal.iconbitmap(resource_path("Icone.ico"))
 
 PaginaPrincipal.title("Bingo Festa Junina Matriz")
 # Um tamanho inicial maior para o novo layout
